@@ -29,6 +29,24 @@ describe('API testing for pet end point',()=>{
     
     })
 
+    // Not returning 405
+    it.skip('Should not be able to create a new pet for an invalid input',()=>{
+
+      const petDetails = {
+        name : "pet4",
+        status : "someStatus"
+      }
+
+      createNewPet(petDetails).then((response)=>{
+        expect(response.status).to.equal(405)
+        expect(response.body.name).to.equal(petDetails.name)
+        expect(response.body.status).to.equal(petDetails.status)
+      })
+    
+
+    })
+    
+
     it('Should be able to find a pet by id',()=>{
 
     
