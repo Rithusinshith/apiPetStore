@@ -40,4 +40,23 @@ export function findThePetById({petId}){
     })
 }
 
+export function findThePetByStatus(){
+
+    return cy.request({
+        method : 'GET',
+        url : '/pet/findByStatus',
+        qs : {status:'sold'}
+    })
+}
+
+
+
+
+
+
+
+
+
+
+
 

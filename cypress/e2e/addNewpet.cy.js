@@ -1,5 +1,5 @@
 
-import { createNewPet,findThePetById } from "../helpers/petStore"
+import { createNewPet,findThePetById,findThePetByStatus } from "../helpers/petStore"
 
 
 describe('API testing for pet end point',()=>{
@@ -18,7 +18,7 @@ describe('API testing for pet end point',()=>{
 
       const petDetails ={
         name: "pet1",
-        status : "Available"
+        status : "available"
       }
 
       createNewPet(petDetails).then((response)=>{
@@ -42,7 +42,26 @@ describe('API testing for pet end point',()=>{
 
     } )
 
-   
+    it('Should be able to find a pet by status',()=>{
+
+     // const status = 'sold'
+      findThePetByStatus().then((response)=>
+      {
+        expect(response.status).to.equal(200)
+        expect(response.body).to.be.an('array')
+        response.body.forEach((pet)=>{
+          expect(pet).to.have.property('id')
+          const id1 = pet.id
+          cy.log(id1)
+          expect(pet).to.have.property('status','sold')
+        
+        })
+      
+      })
+
+
+  } )
+
 
   
 
