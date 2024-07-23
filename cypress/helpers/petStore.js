@@ -1,5 +1,5 @@
 
-export function createNewPet({petName,petStatus}) {
+export function createNewPet({name,status}) {
 
      let body ={
             "id": 0,
@@ -7,7 +7,7 @@ export function createNewPet({petName,petStatus}) {
               "id": 0,
               "name": "string"
             },
-            "name": petName,
+            "name": name,
             "photoUrls": [
               "string"
             ],
@@ -17,7 +17,7 @@ export function createNewPet({petName,petStatus}) {
                 "name": "string"
               }
             ],
-            "status": petStatus
+            "status": status
           
         }
 
@@ -30,3 +30,14 @@ export function createNewPet({petName,petStatus}) {
             expect(res.status).to.eq(200)
          })
 }
+
+export function findThePetById({petId}){
+
+    return cy.request({
+        method : 'GET',
+        url : `/pet/${petId}`,
+        failOnStatusCode: false
+    })
+}
+
+
