@@ -49,7 +49,7 @@ export function findThePetByStatus(){
     })
 }
 
-export function updateThePetDetails({id,name,status,}){
+export function updateThePetDetails({id,name,status}){
     cy.log(id)
     let body ={
         "id": id,
@@ -78,6 +78,18 @@ export function updateThePetDetails({id,name,status,}){
           },
         failOnStatusCode: false
     })
+}
+
+export function deletePet({id}){
+
+    cy.log(id)
+
+    return cy.request({
+        method : 'DELETE',
+        url:`/pet/${id}`,
+    })
+
+
 }
 
 

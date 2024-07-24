@@ -1,5 +1,5 @@
 
-import { createNewPet,findThePetById,findThePetByStatus,updateThePetDetails } from "../helpers/petStore"
+import { createNewPet,findThePetById,findThePetByStatus,updateThePetDetails,deletePet } from "../helpers/petStore"
 
 
 describe('API testing for pet end point',()=>{
@@ -65,6 +65,25 @@ describe('API testing for pet end point',()=>{
 
 
     })
+
+      
+    it.skip('should not be able to update an existing pet if missing data',()=>{
+
+      const petDetails = {
+
+        id : " name",
+        name : "0",
+        status : "sold"
+
+      }
+
+      updateThePetDetails(petDetails).then((response)=>{
+        expect(response.status).to.equal(200)
+        expect(response.body.status).to.equal(petDetails.status)
+        const idDetails = response.body.id;
+        cy.log(idDetails)
+      })
+    })
     
 
     it('Should be able to find a pet by id',()=>{
@@ -80,9 +99,21 @@ describe('API testing for pet end point',()=>{
 
     } )
 
+    it('should be able to delete an existing pet',()=>{
+
+
+      const id = petId
+      deletePet({id}).then((response)=>{
+        expect(response.status).to.equal(200)
+        expect(response.body.message).to.equal(id.toString())
+
+    })
+
+  })
+
     it('Should be able to find a pet by status',()=>{
 
-     // const status = 'sold'
+
       findThePetByStatus().then((response)=>
       {
         expect(response.status).to.equal(200)
@@ -98,7 +129,7 @@ describe('API testing for pet end point',()=>{
       })
 
 
-  } )
+    })
 
 
   
