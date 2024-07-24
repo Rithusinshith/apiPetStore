@@ -1,5 +1,5 @@
 
-import { createNewPet,findThePetById,findThePetByStatus } from "../helpers/petStore"
+import { createNewPet,findThePetById,findThePetByStatus,updateThePetDetails } from "../helpers/petStore"
 
 
 describe('API testing for pet end point',()=>{
@@ -29,7 +29,7 @@ describe('API testing for pet end point',()=>{
     
     })
 
-    // Not returning 405
+    // Not returning 405, returning 200
     it.skip('Should not be able to create a new pet for an invalid input',()=>{
 
       const petDetails = {
@@ -42,7 +42,27 @@ describe('API testing for pet end point',()=>{
         expect(response.body.name).to.equal(petDetails.name)
         expect(response.body.status).to.equal(petDetails.status)
       })
+
+    })
+
     
+    it('should be able to update an existing pet',()=>{
+
+      const petDetails = {
+
+        id : petId,
+        name : "newPet3",
+        status : "sold"
+
+      }
+
+      updateThePetDetails(petDetails).then((response)=>{
+        expect(response.status).to.equal(200)
+        expect(response.body.status).to.equal(petDetails.status)
+        const idDetails = response.body.id;
+        cy.log(idDetails)
+      })
+
 
     })
     

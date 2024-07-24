@@ -49,6 +49,38 @@ export function findThePetByStatus(){
     })
 }
 
+export function updateThePetDetails({id,name,status,}){
+    cy.log(id)
+    let body ={
+        "id": id,
+        "category": {
+          "id": 0,
+          "name": "string"
+        },
+        "name": name,
+        "photoUrls": [
+          "string"
+        ],
+        "tags": [
+          {
+            "id": 0,
+            "name": "string"
+          }
+        ],
+        "status": status
+      }
+    return cy.request({
+        method : 'PUT',
+        url:'/pet',
+        body: body,
+        headers: {
+            'Content-Type': 'application/json'
+          },
+        failOnStatusCode: false
+    })
+}
+
+
 
 
 
