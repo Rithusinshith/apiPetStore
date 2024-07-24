@@ -92,7 +92,14 @@ export function deletePet({petId}){
 
 }
 
+export function updateWithFormData({petId}){
 
+    cy.log(petId)
+    return cy.request({
+        method : 'POST',
+        url:`/pet/${petId}`
+    })
+}
 
 
 
