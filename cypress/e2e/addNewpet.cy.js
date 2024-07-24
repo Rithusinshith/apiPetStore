@@ -99,15 +99,24 @@ describe('API testing for pet end point',()=>{
 
     } )
 
-    it('should be able to delete an existing pet',()=>{
+    it('should be able to delete an existing pet and return 404 if the pet is not exist',()=>{
 
 
-      const id = petId
-      deletePet({id}).then((response)=>{
+      deletePet({petId}).then((response)=>{
         expect(response.status).to.equal(200)
-        expect(response.body.message).to.equal(id.toString())
+        expect(response.body.message).to.equal(petId.toString())
 
     })
+
+    findThePetById({petId}).then((response)=>
+        {
+          expect(response.status).to.equal(404)
+          expect(response.body.message).to.equal("Pet not found")
+          
+        })
+  
+
+  
 
   })
 

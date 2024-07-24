@@ -80,13 +80,13 @@ export function updateThePetDetails({id,name,status}){
     })
 }
 
-export function deletePet({id}){
+export function deletePet({petId}){
 
-    cy.log(id)
+    cy.log(petId)
 
     return cy.request({
         method : 'DELETE',
-        url:`/pet/${id}`,
+        url:`/pet/${petId}`,
     })
 
 
